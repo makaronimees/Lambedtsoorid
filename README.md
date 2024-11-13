@@ -2,6 +2,8 @@
 ## Autorid: Pilleriin Sillakivi, Kriset Laiuste
 Käivituseks peaks tõmbama alla kõik siin repos olevad failid.
 
+Projekti erinevad versioonid saavad olema siinsamas GitHub'is Release'ide all.
+
 ## Alfaversiooni kommentaar
 ### Kuidas on senine koostöö sujunud? 
 Probleeme ei ole tekkinud, mõlemad oleme piisavalt panustanud.
