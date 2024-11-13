@@ -1,6 +1,6 @@
 # Lämbed tsõõrid
 ## Autorid: Pilleriin Sillakivi, Kriset Laiuste
-Käivituseks peaks tõmbama alla kõik siin repos olevad failid.
+Käivituseks peaks tõmbama alla kõik siin repos olevad failid ja need vajadusel lahti pakkima, et importid korralikult töötaks.
 
 Projekti erinevad versioonid saavad olema siinsamas GitHub'is Release'ide all.
 
