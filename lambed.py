@@ -10,7 +10,9 @@
 #
 # mõningane eeskuju: isiklik kogemus, online-küsitlused 
 #
-# Lisakommentaar (nt kasutusjuhend): GitHub'st tõmmata kõik failid ning siis run
+# Lisakommentaar (nt kasutusjuhend): 
+# GitHub'ist peaks tõmbama alla kõik siin repos olevad failid 
+# ja need vajadusel lahti pakkima, et importid korralikult töötaks.
 #
 ###############################################################################
 #
