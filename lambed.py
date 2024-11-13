@@ -10,7 +10,7 @@
 #
 # mõningane eeskuju: isiklik kogemus, online-küsitlused 
 #
-# Lisakommentaar (nt kasutusjuhend): 
+# Lisakommentaar (nt kasutusjuhend): GitHub'st tõmmata kõik failid ning siis run
 #
 ###############################################################################
 #
@@ -22,9 +22,9 @@
 #   Kokku umbes 10h koos planeerimisega.
 # Millised on projektiga seoses edasised plaanid ja edasiarendused? 
 #   Lisame funktsionaalsuse, mis oskab tegelikult midagi soovitada.
-#   Selleks peame ilmselt lisama funktsioone ning rohkem andmeid ja kordajaid.
-#   Lisaks võiks struktuuri parandada - praegu on rõhk sellel, et asi toimiks.
 #   Teeme ilmselt funktsiooni, mis arvutab meie loodud kordaja, mille põhjal kasutajale sobivad autod soovitatakse
+#   Lisaks võiks struktuuri parandada - praegu on rõhk sellel, et asi toimiks.
+#   
 ###############################################################################
 
 from easygui import *
