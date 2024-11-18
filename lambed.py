@@ -31,7 +31,23 @@
 
 from easygui import *
 
+def arvuta_kordaja(remont, kesremondib, nitroeskusaal, lemmik, budget):
+    kordaja=0
+    #motlen minigt loogikat valja
+    eelarve={"Minimaalne":1, "Keskmine":2 , "Okei":3, "Suur":8, "Lõpmatu":1000}
+    ns={"Ei": 0, "Jah":5}
+    remontija={"Jah": 2, "Ei":8 }
+    if remont =="Jah":
+        kordaja+=remontija[kesremondib]
+    else:
+        #sest tak vaja uut autot kui ei taha remontida
+        kordaja+=20
 
+
+    kordaja+=eelarve[budget]
+    kordaja+=ns[nitroeskusaal]
+
+    return kordaja
 jatkub=True
 while jatkub:
     koik_margid = ["Audi", "Lada","BMW","Mercedes-Benz","Volkswagen","Ford","Jaguar","Škoda","Opel", "Kia"]
