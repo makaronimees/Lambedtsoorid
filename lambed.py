@@ -48,6 +48,13 @@ def arvuta_kordaja(remont, kesremondib, nitroeskusaal, lemmik, budget):
     kordaja+=ns[nitroeskusaal]
 
     return kordaja
+
+
+def callback():
+    msgbox("Aitäh, et usaldasite meid oma otsustusprotsessis!")
+    quit()
+
+
 jatkub=True
 while jatkub:
     koik_margid = ["Audi", "Lada","BMW","Mercedes-Benz","Volkswagen","Ford","Jaguar","Škoda","Opel", "Kia"]
@@ -58,23 +65,20 @@ while jatkub:
 
     nimi = enterbox("Mis on su nimi?","Tere!","",True)
 
-    kindel_ei = multchoicebox("On sul juba teada, mida kindlasti EI soovi?","Kindlad EI-d",koik_margid,None)
+    kindel_ei = multchoicebox("On sul juba teada, mida kindlasti EI soovi?","Kindlad EI-d",koik_margid,None,cancel_choice=callback())
 
     #tegeleme edaspidi vaid nende autodega, millest kasutaja huvitatud on
     if kindel_ei != None:
         for mark in kindel_ei:
             koik_margid.remove(mark)
     if len(koik_margid)== 0:
-        #hiljem kõik jatkub false asendada mingi head aega sõnumiga?
-        jatkub=False
-
-    #nendele, mis kasutajale meeldivad, lisame hiljem kordaja? et suurema tõenäosusega neid soovitada
-    pigem_jah = multchoicebox("Äkki on ka teada, milliseid marke eelistad?","Pigem need",koik_margid)
+        break
 
     budgetnupud=["Minimaalne", "Keskmine", "Okei", "Suur", "Lõpmatu"]
     budget=buttonbox("Mis on su eelarve?", choices=budgetnupud)
     if budget == "Suur":
-        valikudlisa=tsipalux
+        koik_margid+=tsipalux
+        print(koik_margid)
     #huvitav kas see on nilbe sõnapruuk?
     nitroseksuaal=buttonbox("Kas oled nitroseksuaal?", choices=["Jah", "Ei"])
     if nitroseksuaal=="Jah":
@@ -88,12 +92,12 @@ while jatkub:
     
     remondivalmis=buttonbox("Kas oled valmis remondiks?", choices=["Jah", "Ei"])
     if remondivalmis=="Ei":
-        jatkub=False
+        break
     kasise=buttonbox("Kas kavatsed ise teha?", choices=["Jah","Ei"])
-    jatkub=False
 
 
-tekst="Peaksid vaatama järgnevaud autosid: "
-#motlen veel mingid napunaited valja(veic ironic, kui mu enda auto isegi ülevaatuselt läbi ei saanud...)
-soovitused="Meie isiklikud soovitused on.."
-popup=msgbox(tekst)
+    tekst="Peaksid vaatama järgnevaud autosid: "
+    #motlen veel mingid napunaited valja(veic ironic, kui mu enda auto isegi ülevaatuselt läbi ei saanud...)
+    soovitused="Meie isiklikud soovitused on.."
+    popup=msgbox(tekst)
+
