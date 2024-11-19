@@ -31,26 +31,27 @@
 
 from easygui import *
 
-def arvuta_kordaja(remont, kesremondib, nitroeskusaal, lemmik, budget):
+def arvuta_kordaja(remont, kesremondib, nitroeskusaal, budget):
     kordaja=0
     #motlen minigt loogikat valja
     eelarve={"Minimaalne":1, "Keskmine":2 , "Okei":3, "Suur":8, "Lõpmatu":1000}
-    ns={"Ei": 0, "Jah":5}
+    ns={"Ei": 3, "Jah":7}
     remontija={"Jah": 2, "Ei":8 }
     if remont =="Jah":
         kordaja+=remontija[kesremondib]
     else:
         #sest tak vaja uut autot kui ei taha remontida
         kordaja+=20
-
-
     kordaja+=eelarve[budget]
     kordaja+=ns[nitroeskusaal]
 
     return kordaja
+def mida_valjastab(kordaja):
+    return autod
 jatkub=True
 while jatkub:
-    koik_margid = ["Audi", "Lada","BMW","Mercedes-Benz","Volkswagen","Ford","Jaguar","Škoda","Opel", "Kia"]
+    koik_margid = ["Audi", "Lada","BMW","Mercedes-Benz","Volkswagen","Ford","Jaguar","Škoda","Opel", "Kia", "Mazda", "Nissan", "Subaru", "Volvo"]
+    reliable=["Volkswagen", "Škoda","Opel", "Kia", "Ford", "Volvo"]
     klassika = ["Audi", "BMW", "Mercedes-Benz", "Lada" , "Volkswagen", "Ford",]
     driftikad=["BMW", "Nissan", "Mazda", "Opel Omega"]
     kiiredpillid=["Subaru", "BMW", "Ford", "Audi", "Mercedes-Benz"]
@@ -68,32 +69,36 @@ while jatkub:
         #hiljem kõik jatkub false asendada mingi head aega sõnumiga?
         jatkub=False
 
-    #nendele, mis kasutajale meeldivad, lisame hiljem kordaja? et suurema tõenäosusega neid soovitada
-    pigem_jah = multchoicebox("Äkki on ka teada, milliseid marke eelistad?","Pigem need",koik_margid)
-
     budgetnupud=["Minimaalne", "Keskmine", "Okei", "Suur", "Lõpmatu"]
     budget=buttonbox("Mis on su eelarve?", choices=budgetnupud)
     if budget == "Suur":
         valikudlisa=tsipalux
+    if budget == "Minimaalne":
+        pass
+    else:
+        nitroseksuaal=buttonbox("Kas oled nitroseksuaal?", choices=["Jah", "Ei"])
+        if nitroseksuaal=="Jah":
+            missugunens=buttonbox("Missugune täpsemalt?", choices=["Klassika", "Drift", "Racing"])
+            if missugunens == "Klassika":
+                valikute_nimekiri=klassika
+            elif missugunens == "Drift":
+                valikute_nimekiri=driftikad
+            else:
+                valikute_nimekiri=kiiredpillid
+
     #huvitav kas see on nilbe sõnapruuk?
-    nitroseksuaal=buttonbox("Kas oled nitroseksuaal?", choices=["Jah", "Ei"])
-    if nitroseksuaal=="Jah":
-        missugunens=buttonbox("Missugune täpsemalt?", choices=["Klassika", "Drift", "Racing"])
-        if missugunens == "Klassika":
-            valikute_nimekiri=klassika
-        elif missugunens == "Drift":
-            valikute_nimekiri=driftikad
-        else:
-            valikute_nimekiri=kiiredpillid
+    
     
     remondivalmis=buttonbox("Kas oled valmis remondiks?", choices=["Jah", "Ei"])
     if remondivalmis=="Ei":
         jatkub=False
-    kasise=buttonbox("Kas kavatsed ise teha?", choices=["Jah","Ei"])
-    jatkub=False
+    else:
+        kasise=buttonbox("Kas kavatsed ise teha?", choices=["Jah","Ei"])
+        jatkub=False
 
 
-tekst="Peaksid vaatama järgnevaud autosid: "
+
 #motlen veel mingid napunaited valja(veic ironic, kui mu enda auto isegi ülevaatuselt läbi ei saanud...)
-soovitused="Meie isiklikud soovitused on.."
+soovitused="Meie isiklikud soovitused on vältida autosid, mida müüvad teiseringi diilerid. Pigem osta käest kätte või siis otse esindusest. Samuti tasub auto ajalugu vaadata Transpordiameti kodulehelt numbrimärgi taustakontrolli alt ning samuti sealt samast vaadata ka kindlustusjuhtumite ajalugu. Tasuks ka tähelepanu pöörata päritoluriigile, isiklikult ei ostaks kunagi autot, mis on tulnud Lätist, Leedust või Poolast, sest seal ehitatakse 'Frankensteine', ehk mitme auto juppidest kokku pandud autosid. Need autod pole enam nii struktuurselt vastupidavad ning neil võivad olla nähtamatud ning ootamatud vead."
+tekst="Peaksid vaatama järgnevaud autosid: " + soovitused
 popup=msgbox(tekst)
