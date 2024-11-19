@@ -31,11 +31,11 @@
 
 from easygui import *
 
-def arvuta_kordaja(remont, kesremondib, nitroeskusaal, lemmik, budget):
+def arvuta_kordaja(remont, kesremondib, nitroeskusaal, budget):
     kordaja=0
     #motlen minigt loogikat valja
     eelarve={"Minimaalne":1, "Keskmine":2 , "Okei":3, "Suur":8, "Lõpmatu":1000}
-    ns={"Ei": 0, "Jah":5}
+    ns={"Ei": 3, "Jah":7}
     remontija={"Jah": 2, "Ei":8 }
     if remont =="Jah":
         kordaja+=remontija[kesremondib]
@@ -55,9 +55,14 @@ def callback():
     quit()
 
 
+def mida_valjastab(kordaja):
+    return autod
+
+
 jatkub=True
 while jatkub:
-    koik_margid = ["Audi", "Lada","BMW","Mercedes-Benz","Volkswagen","Ford","Jaguar","Škoda","Opel", "Kia"]
+    koik_margid = ["Audi", "Lada","BMW","Mercedes-Benz","Volkswagen","Ford","Jaguar","Škoda","Opel", "Kia", "Mazda", "Nissan", "Subaru", "Volvo"]
+    reliable=["Volkswagen", "Škoda","Opel", "Kia", "Ford", "Volvo"]
     klassika = ["Audi", "BMW", "Mercedes-Benz", "Lada" , "Volkswagen", "Ford",]
     driftikad=["BMW", "Nissan", "Mazda", "Opel Omega"]
     kiiredpillid=["Subaru", "BMW", "Ford", "Audi", "Mercedes-Benz"]
@@ -65,7 +70,7 @@ while jatkub:
 
     nimi = enterbox("Mis on su nimi?","Tere!","",True)
 
-    kindel_ei = multchoicebox("On sul juba teada, mida kindlasti EI soovi?","Kindlad EI-d",koik_margid,None,cancel_choice=callback())
+    kindel_ei = multchoicebox("On sul juba teada, mida kindlasti EI soovi?","Kindlad EI-d",koik_margid,None)
 
     #tegeleme edaspidi vaid nende autodega, millest kasutaja huvitatud on
     if kindel_ei != None:
@@ -78,8 +83,9 @@ while jatkub:
     budget=buttonbox("Mis on su eelarve?", choices=budgetnupud)
     if budget == "Suur":
         koik_margid+=tsipalux
-        print(koik_margid)
-    #huvitav kas see on nilbe sõnapruuk?
+    if budget == "Minimaalne":
+        pass
+    else:
     nitroseksuaal=buttonbox("Kas oled nitroseksuaal?", choices=["Jah", "Ei"])
     if nitroseksuaal=="Jah":
         missugunens=buttonbox("Missugune täpsemalt?", choices=["Klassika", "Drift", "Racing"])
@@ -95,9 +101,8 @@ while jatkub:
         break
     kasise=buttonbox("Kas kavatsed ise teha?", choices=["Jah","Ei"])
 
-
-    tekst="Peaksid vaatama järgnevaud autosid: "
     #motlen veel mingid napunaited valja(veic ironic, kui mu enda auto isegi ülevaatuselt läbi ei saanud...)
-    soovitused="Meie isiklikud soovitused on.."
+    soovitused="Meie isiklikud soovitused on vältida autosid, mida müüvad teiseringi diilerid. Pigem osta käest kätte või siis otse esindusest. Samuti tasub auto ajalugu vaadata Transpordiameti kodulehelt numbrimärgi taustakontrolli alt ning samuti sealt samast vaadata ka kindlustusjuhtumite ajalugu. Tasuks ka tähelepanu pöörata päritoluriigile, isiklikult ei ostaks kunagi autot, mis on tulnud Lätist, Leedust või Poolast, sest seal ehitatakse 'Frankensteine', ehk mitme auto juppidest kokku pandud autosid. Need autod pole enam nii struktuurselt vastupidavad ning neil võivad olla nähtamatud ning ootamatud vead."
+    tekst="Peaksid vaatama järgnevaud autosid: " + soovitused
     popup=msgbox(tekst)
 
