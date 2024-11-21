@@ -34,8 +34,8 @@ from easygui import *
 def arvuta_kordaja(remont, kesremondib, nitroeskusaal, budget):
     kordaja=0
     #motlen minigt loogikat valja
-    eelarve={"Minimaalne":1, "Keskmine":2 , "Okei":3, "Suur":8, "Lõpmatu":1000}
-    ns={"Ei": 3, "Jah":7}
+    eelarve={"Minimaalne":5, "Keskmine":6 , "Okei":7, "Suur":11, "Lõpmatu":1000}
+    ns={"Ei": 7, "Jah":3; 0:0}
     remontija={"Jah": 2, "Ei":8 }
     if remont =="Jah":
         kordaja+=remontija[kesremondib]
@@ -55,8 +55,34 @@ def callback():
     quit()
 
 
-def mida_valjastab(kordaja):
-    return autod
+def mida_valjastab(kordaja, ns):
+    if kordaja<5:
+        autod="rondid"
+        aastad="Roimad"
+
+    elif kordaja<=10:
+        autod=reliable
+        aastad="2003-2012"
+    elif kordaja <=20:
+        autod=reliable
+        aasta="2008-2020"
+    else:
+        autod=koik_margid
+        aasta="Kõik aastad"
+    if kordaja> 15:
+        if ns =="Klassika":
+            for el in klassika:
+                autod.append(el)
+        elif ns == "Drift":
+            for el in driftikad:
+                autod.append(el)
+        elif ns== "Racing":
+            for el in kiiredpillid:
+                autod.append(el)
+
+
+
+    return (autod,aasta)
 
 
 jatkub=True
@@ -86,15 +112,15 @@ while jatkub:
     if budget == "Minimaalne":
         pass
     else:
-    nitroseksuaal=buttonbox("Kas oled nitroseksuaal?", choices=["Jah", "Ei"])
-    if nitroseksuaal=="Jah":
-        missugunens=buttonbox("Missugune täpsemalt?", choices=["Klassika", "Drift", "Racing"])
-        if missugunens == "Klassika":
-            valikute_nimekiri=klassika
-        elif missugunens == "Drift":
-            valikute_nimekiri=driftikad
-        else:
-            valikute_nimekiri=kiiredpillid
+        nitroseksuaal=buttonbox("Kas oled nitroseksuaal?", choices=["Jah", "Ei"])
+        if nitroseksuaal=="Jah":
+            missugunens=buttonbox("Missugune täpsemalt?", choices=["Klassika", "Drift", "Racing"])
+            if missugunens == "Klassika":
+                valikute_nimekiri=klassika
+            elif missugunens == "Drift":
+                valikute_nimekiri=driftikad
+            else:
+                valikute_nimekiri=kiiredpillid
     
     remondivalmis=buttonbox("Kas oled valmis remondiks?", choices=["Jah", "Ei"])
     if remondivalmis=="Ei":
