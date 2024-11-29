@@ -35,8 +35,8 @@ def arvuta_kordaja(remont, kesremondib, nitroeskusaal, budget):
     kordaja=0
     #motlen minigt loogikat valja
     eelarve={"Minimaalne":5, "Keskmine":6 , "Okei":7, "Suur":11, "Lõpmatu":1000}
-    ns={"Ei": 7, "Jah":3; 0:0}
-    remontija={"Jah": 2, "Ei":8 }
+    ns={"Ei": 7, "Jah":3, 0:0}
+    remontija={"Jah": 2, "Ei":8 , "0":12}
     if remont =="Jah":
         kordaja+=remontija[kesremondib]
     else:
@@ -79,10 +79,12 @@ def mida_valjastab(kordaja, ns):
         elif ns== "Racing":
             for el in kiiredpillid:
                 autod.append(el)
-
-
-
-    return (autod,aasta)
+    
+    tekst=""
+    for rida in autod:
+        tekst+=rida+ ", "
+    tekst+=aasta
+    return tekst
 
 
 jatkub=True
@@ -124,11 +126,18 @@ while jatkub:
     
     remondivalmis=buttonbox("Kas oled valmis remondiks?", choices=["Jah", "Ei"])
     if remondivalmis=="Ei":
+        kasise="0"
         break
-    kasise=buttonbox("Kas kavatsed ise teha?", choices=["Jah","Ei"])
+    else:
+        kasise=buttonbox("Kas kavatsed ise teha?", choices=["Jah","Ei"])
+        break
 
+kordaja=arvuta_kordaja(remondivalmis, kasise, nitroseksuaal, budget)
+valjastatav=mida_valjastab(kordaja, nitroseksuaal)
     #motlen veel mingid napunaited valja(veic ironic, kui mu enda auto isegi ülevaatuselt läbi ei saanud...)
-    soovitused="Meie isiklikud soovitused on vältida autosid, mida müüvad teiseringi diilerid. Pigem osta käest kätte või siis otse esindusest. Samuti tasub auto ajalugu vaadata Transpordiameti kodulehelt numbrimärgi taustakontrolli alt ning samuti sealt samast vaadata ka kindlustusjuhtumite ajalugu. Tasuks ka tähelepanu pöörata päritoluriigile, isiklikult ei ostaks kunagi autot, mis on tulnud Lätist, Leedust või Poolast, sest seal ehitatakse 'Frankensteine', ehk mitme auto juppidest kokku pandud autosid. Need autod pole enam nii struktuurselt vastupidavad ning neil võivad olla nähtamatud ning ootamatud vead."
-    tekst="Peaksid vaatama järgnevaud autosid: " + soovitused
-    popup=msgbox(tekst)
+soovitused="Meie isiklikud soovitused on vältida autosid, mida müüvad teiseringi diilerid. Pigem osta käest kätte või siis otse esindusest. Samuti tasub auto ajalugu vaadata Transpordiameti kodulehelt numbrimärgi taustakontrolli alt ning samuti sealt samast vaadata ka kindlustusjuhtumite ajalugu. Tasuks ka tähelepanu pöörata päritoluriigile, isiklikult ei ostaks kunagi autot, mis on tulnud Lätist, Leedust või Poolast, sest seal ehitatakse 'Frankensteine', ehk mitme auto juppidest kokku pandud autosid. Need autod pole enam nii struktuurselt vastupidavad ning neil võivad olla nähtamatud ning ootamatud vead."
+tekst=nimi+", "+ "peaksid vaatama järgnevaud autosid: " + valjastatav + "\n"+ "\n" + soovitused
+popup=msgbox(tekst)
+    
+
 
