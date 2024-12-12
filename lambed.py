@@ -63,12 +63,14 @@ def mida_valjastab(kordaja, ns):
         aastad="2003-2012"
     elif kordaja <=25:
         autod=reliable
-        aasta="2008-2020"
+        aastad="2008-2020"
     else:
         autod=koik_margid
-        aasta="Kõik aastad"
+        aastad="Kõik aastad"
     if kordaja> 25:
+        aastad="1997-2005"
         if ns =="Klassika":
+            aastad="1980-1990"
             for el in klassika:
                 autod.append(el)
         elif ns == "Drift":
@@ -81,7 +83,7 @@ def mida_valjastab(kordaja, ns):
     tekst=""
     for rida in autod:
         tekst+=rida+ ", "
-    tekst+=aasta
+    tekst+=aastad
     return tekst
 
 def x_kontroll(nimi):
