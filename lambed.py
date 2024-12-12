@@ -35,8 +35,8 @@ def arvuta_kordaja(remont, kesremondib, nitroeskusaal, budget):
     kordaja=0
     #motlen minigt loogikat valja
     eelarve={"Minimaalne":5, "Keskmine":6 , "Okei":7, "Suur":11, "Lõpmatu":1000}
-    ns={"Ei": 7, "Jah":3, 0:0}
-    remontija={"Jah": 2, "Ei":8 , "0":12}
+    ns={"Ei": 7, "Jah":-3, 0:0}
+    remontija={"Jah": 2, "Ei":8 , "0":12, 0:0}
     if remont =="Jah":
         kordaja+=remontija[kesremondib]
     else:
@@ -54,20 +54,20 @@ def callback():
 
 
 def mida_valjastab(kordaja, ns):
-    if kordaja<5:
+    if kordaja<8:
         autod="rondid"
         aastad="Roimad"
 
-    elif kordaja<=10:
+    elif kordaja<=14:
         autod=reliable
         aastad="2003-2012"
-    elif kordaja <=20:
+    elif kordaja <=25:
         autod=reliable
         aasta="2008-2020"
     else:
         autod=koik_margid
         aasta="Kõik aastad"
-    if kordaja> 15:
+    if kordaja> 25:
         if ns =="Klassika":
             for el in klassika:
                 autod.append(el)
@@ -88,13 +88,16 @@ def x_kontroll(nimi):
     if nimi == None:
         quit()
 
-
-koik_margid = ["Audi", "Lada","BMW","Mercedes-Benz","Volkswagen","Ford","Jaguar","Škoda","Opel", "Kia", "Mazda", "Nissan", "Subaru", "Volvo"]
-reliable=["Volkswagen", "Škoda","Opel", "Kia", "Ford", "Volvo"]
-klassika = ["Audi", "BMW", "Mercedes-Benz", "Lada" , "Volkswagen", "Ford",]
+remondivalmis=0
+kasise=0
+nitroseksuaal=0
+budget=0
+koik_margid = ["Audi", "Lada","BMW","Mercedes-Benz","Volkswagen","Ford","Jaguar","Škoda","Opel", "Kia", "Mazda", "Nissan", "Subaru", "Volvo", "Fiat", "Dodge", "Ram"]
+reliable=["Volkswagen", "Škoda","Opel", "Kia", "Ford", "Volvo", "Fiat"]
+klassika = ["Audi", "BMW", "Mercedes-Benz", "Lada" , "Volkswagen", "Ford"]
 driftikad=["BMW", "Nissan", "Mazda", "Opel Omega"]
 kiiredpillid=["Subaru", "BMW", "Ford", "Audi", "Mercedes-Benz"]
-tsipalux=["Porsche", "veel midagi"]
+tsipalux=["Porsche", "Dodge", "Ram", "Jaguar"]
 
 nimi = enterbox("Mis on su nimi?","Tere!","",True)
 x_kontroll(nimi)
