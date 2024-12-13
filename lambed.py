@@ -33,14 +33,14 @@ from easygui import *
 
 def arvuta_kordaja(remont, kesremondib, nitroeskusaal, budget):
     kordaja=0
-    #motlen minigt loogikat valja
+    #motlen mingit loogikat valja
     eelarve={"Minimaalne":5, "Keskmine":6 , "Okei":7, "Suur":11, "Lõpmatu":1000}
     ns={"Ei": 7, "Jah":-3, 0:0}
     remontija={"Jah": 2, "Ei":8 , "0":12, 0:0}
     if remont =="Jah":
         kordaja+=remontija[kesremondib]
     else:
-        #sest tak vaja uut autot kui ei taha remontida
+        #sest tal vaja uut autot kui ei taha remontida
         kordaja+=20
 
     kordaja+=eelarve[budget]
@@ -90,6 +90,11 @@ def x_kontroll(nimi):
     if nimi == None:
         quit()
 
+def margi_eemaldus(mark,koik):
+    for nimekiri in koik:
+        if mark in nimekiri:
+            nimekiri.remove(mark)
+
 remondivalmis=0
 kasise=0
 nitroseksuaal=0
@@ -101,6 +106,8 @@ driftikad=["BMW", "Nissan", "Mazda", "Opel Omega"]
 kiiredpillid=["Subaru", "BMW", "Ford", "Audi", "Mercedes-Benz"]
 tsipalux=["Porsche", "Dodge", "Ram", "Jaguar"]
 
+koik_valikud = [koik_margid, reliable, klassika, driftikad, kiiredpillid, tsipalux]
+
 nimi = enterbox("Mis on su nimi?","Tere!","",True)
 x_kontroll(nimi)
 
@@ -110,7 +117,8 @@ kindel_ei = multchoicebox("On sul juba teada, mida kindlasti EI soovi?","Kindlad
 
 try:
     for mark in kindel_ei:
-        koik_margid.remove(mark)
+        margi_eemaldus(mark,koik_valikud)
+
 except:
     pass
 
@@ -147,7 +155,7 @@ kordaja=arvuta_kordaja(remondivalmis, kasise, nitroseksuaal, budget)
 valjastatav=mida_valjastab(kordaja, nitroseksuaal)
 #motlen veel mingid napunaited valja(veic ironic, kui mu enda auto isegi ülevaatuselt läbi ei saanud...)
 soovitused="Meie isiklikud soovitused on vältida autosid, mida müüvad teiseringi diilerid. Pigem osta käest kätte või siis otse esindusest. Samuti tasub auto ajalugu vaadata Transpordiameti kodulehelt numbrimärgi taustakontrolli alt ning samuti sealt samast vaadata ka kindlustusjuhtumite ajalugu. Tasuks ka tähelepanu pöörata päritoluriigile, isiklikult ei ostaks kunagi autot, mis on tulnud Lätist, Leedust või Poolast, sest seal ehitatakse 'Frankensteine', ehk mitme auto juppidest kokku pandud autosid. Need autod pole enam nii struktuurselt vastupidavad ning neil võivad olla nähtamatud ning ootamatud vead."
-tekst=nimi+", "+ "peaksid vaatama järgnevaud autosid: " + valjastatav + "\n"+ "\n" + soovitused
+tekst=nimi+", "+ "peaksid vaatama järgnevaid autosid: " + valjastatav + "\n"+ "\n" + soovitused
 popup=msgbox(tekst)
 
 
